@@ -1,10 +1,10 @@
 /*
 * File: App.java
-* Author: Orosz Olivér Arnold
-* Copyright: 2024, Orosz Olivér Arnold
+* Author: Reiter Milán
+* Copyright: 2024, Reiter Milán
 * Group: Szoft II/I/N
 * Date: 2024-11-13
-* Github: https://github.com/Hiradura/
+* Github: https://github.com/Milus03/
 * Licenc: GNU GPL
 */
 package com.example;
@@ -18,30 +18,30 @@ import java.io.IOException;
 
 
 /**
- * JavaFX App
+ * Simple JavaFX Application
  */
-public class App extends Application {
+public class MyApplication extends Application {
 
-    private static Scene scene;
+    private static Scene mainScene;
 
     @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("FirstScene"), 640, 480);
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage primaryStage) throws IOException {
+        mainScene = new Scene(loadFXMLFile("ElsoScene"), 640, 480);
+        primaryStage.setScene(mainScene);
+        primaryStage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    static void changeRoot(String fxmlFile) throws IOException {
+        mainScene.setRoot(loadFXMLFile(fxmlFile));
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+    private static Parent loadFXMLFile(String fxmlFile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(MyApplication.class.getResource(fxmlFile + ".fxml"));
+        return loader.load();
     }
 
     public static void main(String[] args) {
         launch();
     }
-
 }
+
