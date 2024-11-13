@@ -1,70 +1,73 @@
 package com.example;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 
-public class MainContr {
+public class ControllerMain {
 
     @FXML
-    private TextField areaField;
+    private TextField resultField;
 
     @FXML
-    private TextField sideA;
+    private TextField inputA;
 
     @FXML
-    private TextField sideB;
+    private TextField inputB;
 
     @FXML
-    private TextField sideC;
+    private TextField inputC;
 
     @FXML
-    private TextField sideD;
+    private TextField inputD;
 
     @FXML
-    void handleCalculate(ActionEvent event) {
+    void onCalculate(ActionEvent event) {
         try {
-            computeArea();
+            calculateResult();
         } catch (Exception e) {
-            areaField.setText("Error");
+            resultField.setText("Calculation Error");
             System.out.println(e);
             System.err.println(e.getMessage());
         }
     }
 
     @FXML
-    private void showInfo(ActionEvent event) {
-        Alert infoAlert = new Alert(Alert.AlertType.NONE);
-        infoAlert.setContentText("Created by: Orosz Olivér Arnold, 2024-11-12, Szoft I/2/N");
-        infoAlert.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-        infoAlert.showAndWait();
+    private void displayInfo(ActionEvent event) {
+        Alert infoPopup = new Alert(Alert.AlertType.NONE);
+        infoPopup.setContentText("Készitő: Reiter Milán, 2024-11-13, Szoftver I/2/N");
+        infoPopup.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        infoPopup.showAndWait();
     }
 
     @FXML
-    void handleExit(ActionEvent event) {
+    void onExit(ActionEvent event) {
         System.exit(0);
     }
 
-    public void computeArea() {
-        String aString = sideA.getText();
-        String bString = sideB.getText();
-        String cString = sideC.getText();
-        String dString = sideD.getText();
+    public void calculateResult() {
+        String textA = inputA.getText();
+        String textB = inputB.getText();
+        String textC = inputC.getText();
+        String textD = inputD.getText();
 
-        double a = Double.parseDouble(aString);
-        double b = Double.parseDouble(bString);
-        double c = Double.parseDouble(cString);
-        double d = Double.parseDouble(dString);
+        double valA = Double.parseDouble(textA);
+        double valB = Double.parseDouble(textB);
+        double valC = Double.parseDouble(textC);
+        double valD = Double.parseDouble(textD);
 
-        double sumAC = a + c;
-        double diffAC = 4 * (a - c);
-        double factor = sumAC / diffAC;
-        double calculation = (a + b - c + d) * (a - b - c + d) * (a + b - c - d) * (-a + b + c + d);
-        double sqrtResult = Math.sqrt(calculation);
+        double sumAC = valA + valC;
+        double diffAC = 4 * (valA - valC);
+        double multiplier = sumAC / diffAC;
+        double complexCalculation = (valA + valB - valC + valD) * (valA - valB - valC + valD) *
+                                     (valA + valB - valC - valD) * (-valA + valB + valC + valD);
+        double squareRoot = Math.sqrt(complexCalculation);
 
-        Double areaResult = factor * sqrtResult;
-        System.out.println(areaResult);
-        areaField.setText(String.valueOf(areaResult));
+        Double finalResult = multiplier * squareRoot;
+        System.out.println(finalResult);
+        resultField.setText(String.valueOf(finalResult));
     }
 }
+
